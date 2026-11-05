@@ -1,0 +1,179 @@
+% lucid front page: page 1 dark, page 2 light.
+% The colors come from colors-dark.tex and colors-light.tex, which lucid.py generates from palette toml files
+%This file is the layout of the palette page
+
+\documentclass{article}
+\usepackage[paperwidth=11in,paperheight=8.5in,margin=0pt]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{fancyvrb}
+\usepackage{fontspec}
+\pagestyle{empty}
+
+% Fonts: Atkinson Hyperlegible if installed, otherwise common fallbacks.
+\IfFontExistsTF{Atkinson Hyperlegible Next}
+  {\setmainfont{Atkinson Hyperlegible Next}}
+  {\IfFontExistsTF{Inter}{\setmainfont{Inter}}{}}
+\IfFontExistsTF{Atkinson Hyperlegible Next ExtraBold}
+  {\newfontfamily\displayfont{Atkinson Hyperlegible Next ExtraBold}}
+  {\newcommand\displayfont{\bfseries}}
+\IfFontExistsTF{Atkinson Hyperlegible Mono}
+  {\setmonofont{Atkinson Hyperlegible Mono}}
+  {\IfFontExistsTF{JetBrains Mono}{\setmonofont{JetBrains Mono}}
+    {\IfFontExistsTF{DejaVu Sans Mono}{\setmonofont{DejaVu Sans Mono}}{}}}
+
+%% colors
+% \lucidcolor{name}{rrggbb} defines the color l-name and the macro \hex{name}.
+% colors-<variant>.tex is a list of these; loading it again redefines them all.
+\newcommand\lucidcolor[2]{\definecolor{l-#1}{HTML}{#2}\expandafter\def\csname hex-#1\endcsname{\##2}}
+\newcommand\hex[1]{\csname hex-#1\endcsname}
+
+%% code box
+% Colors follow lua/lucid/groups.lua. Inside the Verbatim blocks, commands are written \name«text» (guillemets instead of braces, since the code itself uses braces).
+\newlength\boxwidth \setlength\boxwidth{5.25in}
+\newcommand\Cm[1]{\textcolor{l-comment}{\itshape #1}}
+\newcommand\Kw[1]{\textcolor{l-purple}{#1}}
+\newcommand\Fn[1]{\textcolor{l-blue}{#1}}
+\newcommand\Str[1]{\textcolor{l-green}{#1}}
+\newcommand\Esc[1]{\textcolor{l-pink}{#1}}
+\newcommand\Num[1]{\textcolor{l-orange}{#1}}
+\newcommand\Typ[1]{\textcolor{l-yellow}{#1}}
+\newcommand\Bty[1]{\textcolor{l-purple}{#1}}
+\newcommand\Par[1]{\textcolor{l-coral}{#1}}
+\newcommand\Prp[1]{\textcolor{l-lavender}{#1}}
+\newcommand\Op[1]{\textcolor{l-cyan}{#1}}
+\newcommand\Pun[1]{\textcolor{l-fg_faint}{#1}}
+\newcommand\Slf[1]{\textcolor{l-red}{#1}}
+\newcommand\Mod[1]{\textcolor{l-yellow}{\itshape #1}}
+\newcommand\LN[1]{\textcolor{l-fg_gutter}{#1}}
+\newcommand\CLN[1]{\textcolor{l-lavender}{#1}}
+\newcommand\BS{\textbackslash}
+\newcommand\Srch[1]{{\setlength\fboxsep{0pt}\colorbox{l-search}{\strut #1}}}
+\newcommand\CL{\makebox[0pt][l]{\hspace*{-0.16in}\textcolor{l-bg_highlight}{%
+  \rule[-0.3\baselineskip]{\boxwidth}{\baselineskip}}}}
+\fvset{fontsize=\fontsize{9}{12.5}\selectfont}
+
+\begin{SaveVerbatim}[commandchars=\\«»]{code}
+\LN« 1»  \Cm«# Comments stay readable without competing with the code.»
+\LN« 2»  \Kw«from» \Mod«pathlib» \Kw«import» \Typ«Path»
+\LN« 3»
+\LN« 4»  \Kw«class» \Typ«Palette»\Pun«:»
+\LN« 5»      \Kw«def» \Fn«__init__»\Pun«(»\Slf«self»\Pun«,» \Par«path»\Pun«:» \Typ«Path»\Pun«,» \Par«dark»\Pun«:» \Bty«bool» \Op«=» \Num«True»\Pun«):»
+\LN« 6»          \Slf«self»\Pun«.»\Prp«path» \Op«=» \Par«path»
+\LN« 7»          \Slf«self»\Pun«.»\Prp«\Srch«colors»» \Op«=» \Pun«{}»
+\LN« 8»
+\LN« 9»      \Kw«def» \Fn«load»\Pun«(»\Slf«self»\Pun«)» \Op«->» \Bty«dict»\Pun«[»\Bty«str»\Pun«,» \Bty«str»\Pun«]:»
+\LN«10»          \Kw«for» line \Kw«in» \Slf«self»\Pun«.»\Prp«path»\Pun«.»\Fn«read_text»\Pun«().»\Fn«splitlines»\Pun«():»
+\CL\CLN«11»              name\Pun«,» _\Pun«,» value \Op«=» line\Pun«.»\Fn«partition»\Pun«(»\Str«"="»\Pun«)»
+\LN«12»              \Slf«self»\Pun«.»\Prp«\Srch«colors»»\Pun«[»name\Pun«]» \Op«=» value\Pun«.»\Fn«strip»\Pun«(»\Str«' "»\Esc«\BS«»n»\Str«'»\Pun«)»
+\LN«13»          \Kw«return» \Slf«self»\Pun«.»\Prp«\Srch«colors»»  \Cm«# name -> hex»
+\end{SaveVerbatim}
+
+% terminal example (foot)
+\newcommand\T[2]{\textcolor{l-term#1}{#2}}
+\newcommand\TB[2]{\textcolor{l-term#1}{\bfseries #2}}
+\newcommand\Cur{{\setlength\fboxsep{0pt}\colorbox{l-fg}{\strut\phantom{x}}}}
+\begin{SaveVerbatim}[commandchars=\\«»]{term}
+\TB«4»«~/src/lucid» \T«5»«main» \T«2»«›» git status --short
+ \T«1»«M» palettes/light.toml
+\T«1»«??» \TB«15»«notes.md»
+\TB«4»«~/src/lucid» \T«5»«main» \T«2»«›» ./lucid.py | tail -3
+docs/colors-light.tex
+extras/foot/lucid-light.ini
+lua/lucid/palette/light.lua
+\TB«4»«~/src/lucid» \T«5»«main» \T«2»«›» cd docs && x\T«8»«elatex lucid.tex»\Cur
+\end{SaveVerbatim}
+
+%% drawing helpers
+\newcommand\eyebrow[1]{{\addfontfeature{LetterSpace=12}\fontsize{7}{8}\selectfont\bfseries\MakeUppercase{#1}}}
+% \ink{name}: sets the color "ink" to whichever of fg and bg differs more in
+% brightness from l-name, so swatch labels read in either variant.
+\newcommand\grayof[2]{\extractcolorspecs{l-#1}{\inkmodel}{\inkspec}\convertcolorspec{\inkmodel}{\inkspec}{gray}#2}
+\newcommand\ink[1]{\grayof{#1}\gswatch\grayof{bg}\gbg\grayof{fg}\gfg
+  \pgfmathparse{abs(\gswatch-\gbg) > abs(\gswatch-\gfg)}%
+  \ifdim\pgfmathresult pt>0.5pt \colorlet{ink}{l-bg}\else\colorlet{ink}{l-fg}\fi}
+% \tile{x}{y}{width}{height}{name}
+\newcommand\tile[5]{%
+  \ink{#5}%
+  \fill[l-#5, rounded corners=2.5pt] (#1,#2) rectangle ++(#3,-#4);
+  \draw[l-border, line width=0.4pt, rounded corners=2.5pt] (#1,#2) rectangle ++(#3,-#4);
+  \node[anchor=south west, align=left, text=ink, inner sep=0, font=\fontsize{5.4}{6.4}\selectfont]
+    at (#1+0.045,#2-#4+0.06) {\textbf{\expandafter\detokenize\expandafter{#5}}\\{\ttfamily\hex{#5}}};
+}
+
+% \lucidpage{variant} draws one page in whatever colors are loaded.
+\newcommand\lucidpage[1]{%
+\AddToShipoutPictureBG*{\put(0,0){%
+\begin{tikzpicture}[x=1in,y=1in]
+\useasboundingbox (0,0) rectangle (11,8.5);
+\fill[l-bg] (0,0) rectangle (11,8.5);
+\begin{scope}[yshift=-0.4in]
+
+%% title
+\node[anchor=base west, text=l-fg_faint, inner sep=0] at (0.55,7.6) {\eyebrow{Color scheme · #1}};
+\node[anchor=base west, text=l-fg, inner sep=0] at (0.5,6.98) {\displayfont\fontsize{54}{58}\selectfont Lucid};
+\node[anchor=base west, text=l-fg_dim, inner sep=0, font=\fontsize{11.5}{14}\selectfont] at (0.55,6.62)
+  {Tuned for long hours of reading code.};
+
+%% editor
+\node[anchor=north west, inner sep=0] at (0.71,6.18) {\BUseVerbatim[formatcom=\color{l-fg}]{code}};
+\fill[l-bg_dark] (0.55,3.84) rectangle (5.8,3.58);
+\fill[l-blue] (0.55,3.84) rectangle (1.3,3.58);
+\node[text=l-on_accent, font=\ttfamily\bfseries\fontsize{8}{9}\selectfont, inner sep=0] at (0.925,3.71) {NORMAL};
+\node[anchor=west, text=l-fg, font=\ttfamily\fontsize{8}{9}\selectfont, inner sep=0] at (1.42,3.71) {palette.py};
+\node[anchor=east, text=l-fg_dim, font=\ttfamily\fontsize{8}{9}\selectfont, inner sep=0] at (5.68,3.71) {python · 11:12};
+\draw[l-border, line width=0.6pt, rounded corners=4pt] (0.55,6.30) rectangle (5.8,3.58);
+
+%% terminal
+\node[anchor=north west, inner sep=0] at (0.71,3.24) {\BUseVerbatim[formatcom=\color{l-fg}]{term}};
+\draw[l-border, line width=0.6pt, rounded corners=4pt] (0.55,3.36) rectangle (5.8,1.73);
+
+%% accents
+\node[anchor=base west, text=l-fg_faint, inner sep=0] at (6.1,7.6) {\eyebrow{Accents}};
+\foreach \name [count=\i from 0] in {red,coral,orange,yellow,green,teal,cyan,blue,lavender,purple,pink} {
+  \pgfmathsetmacro\x{6.1+mod(\i,6)*0.735}
+  \pgfmathsetmacro\y{7.47-int(\i/6)*0.77}
+  \tile{\x}{\y}{0.675}{0.70}{\name}
+}
+
+%% neutrals: backgrounds & foregrounds
+\node[anchor=base west, text=l-fg_faint, inner sep=0] at (6.1,5.7) {\eyebrow{Backgrounds and foregrounds}};
+\foreach \name [count=\i from 0] in {bg_darker,bg_dark,bg,bg_highlight,bg_strong,border,selection} {
+  \tile{6.1+\i*0.6286}{5.57}{0.5786}{0.62}{\name}
+}
+\foreach \name [count=\i from 0] in {fg_gutter,fg_faint,comment,fg_dim,fg,fg_strong} {
+  \tile{6.1+\i*0.6286}{4.88}{0.5786}{0.62}{\name}
+}
+
+%% highlights behind text
+\node[anchor=base west, text=l-fg_faint, inner sep=0] at (6.1,3.96) {\eyebrow{Highlights behind text}};
+\foreach \name [count=\i from 0] in {diff_add,diff_add_text,diff_change,diff_text,diff_delete,diff_delete_text,search} {
+  \tile{6.1+\i*0.6286}{3.83}{0.5786}{0.62}{\name}
+}
+
+%% terminal
+\node[anchor=base west, text=l-fg_faint, inner sep=0] at (6.1,2.91) {\eyebrow{Terminal 0–15}};
+\foreach \i in {0,...,15} {
+  \pgfmathsetmacro\x{6.1+mod(\i,8)*0.55}
+  \pgfmathsetmacro\y{2.78-int(\i/8)*0.55}
+  \fill[l-term\i, rounded corners=2.5pt] (\x,\y) rectangle ++(0.5,-0.48);
+  \draw[l-border, line width=0.4pt, rounded corners=2.5pt] (\x,\y) rectangle ++(0.5,-0.48);
+  \node[anchor=south west, inner sep=1pt, fill=l-bg, text=l-fg_dim, font=\ttfamily\fontsize{5.8}{6}\selectfont]
+    at (\x+0.05,\y-0.43) {\i};
+}
+\end{scope}
+
+%% footer
+\node[anchor=base west, text=l-fg_faint, inner sep=0, font=\fontsize{7.5}{9}\selectfont] at (0.55,0.5)
+  {Colors from palettes/#1.toml};
+\node[anchor=base east, text=l-fg_faint, inner sep=0, font=\ttfamily\fontsize{7.5}{9}\selectfont] at (10.45,0.5)
+  {bg \hex{bg}\quad fg \hex{fg}};
+\end{tikzpicture}}}%
+\null}
+
+\begin{document}
+\input{colors-dark}\lucidpage{dark}
+\clearpage
+\input{colors-light}\lucidpage{light}
+\end{document}

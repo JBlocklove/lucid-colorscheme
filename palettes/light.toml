@@ -1,0 +1,80 @@
+# lucid light
+#
+# The same names as palettes/dark.toml, with light-theme values. Each color
+# does the same job as its dark counterpart. The background is kept well
+# short of white to cut glare, and the accents keep their hues but are
+# darker, as saturated as a screen allows, so they stay vivid and readable.
+
+[colors]
+# Backgrounds. As in the dark theme, bg_dark and bg_darker sit behind the
+# editor and bg_highlight and bg_strong on top of it. On a light background
+# all four are darker than bg.
+bg_darker    = "#c8cfe4"  # tab line fill
+bg_dark      = "#d6dcee"  # floats, popup menus, statusline
+bg           = "#e2e7f7"  # main background: a soft periwinkle grey, well short of white
+bg_highlight = "#d6dcf0"  # cursorline, color column
+bg_strong    = "#c6cde5"  # selected menu item, matching words, terminal black
+border       = "#b2bad2"  # window borders, separators, whitespace markers
+selection    = "#d0c8f3"  # visual selection
+
+# Foregrounds, faintest to strongest
+fg_gutter    = "#a1a8c2"  # line numbers, end-of-line markers
+fg_faint     = "#8790ac"  # brackets, delimiters, inactive text
+comment      = "#787896"  # comments
+fg_dim       = "#4c5777"  # secondary text, statusline
+fg           = "#273357"  # main text: deep indigo rather than black
+fg_strong    = "#161c3b"  # emphasis, terminal bright white
+on_accent    = "#f5f7fd"  # text on an accent-colored block (search match, mode label)
+
+# Accents, at OKLCH L 0.58–0.62, each close to the most saturated version
+# of its hue a screen can show at that lightness. Green leans a little
+# yellower than the dark theme's mint because that hue can be more
+# saturated at this lightness.
+red          = "#d73843"  # errors, builtin variables (self)
+coral        = "#d1546e"  # parameters
+orange       = "#d55d0d"  # numbers, constants, builtin functions
+yellow       = "#b67915"  # types, modules, warnings
+green        = "#039c61"  # strings, added lines
+teal         = "#009585"  # characters, hints
+cyan         = "#008dad"  # operators, info
+blue         = "#0e75e5"  # functions, changed lines, titles
+lavender     = "#716ed3"  # fields, properties, current line number
+purple       = "#9351dd"  # keywords
+pink         = "#be4bb1"  # escapes, macros, special symbols
+
+# Highlights behind text: accents blended into the background.
+diff_add         = "#bfd9d8"  # green, 80% toward bg
+diff_add_text    = "#a0cbbd"  # green, 62%: added words inside a changed line (gitsigns)
+diff_change      = "#c9d9f6"  # blue, 87% toward bg
+diff_text        = "#adc9f5"  # blue, 72%: the changed part of a changed line
+diff_delete      = "#e6cbd6"  # red, 82% toward bg
+diff_delete_text = "#e7aeb5"  # red, 64%: deleted words inside a changed line (gitsigns)
+search           = "#a9cadf"  # cyan, 68%: search matches
+
+[terminal]
+foreground   = "fg"
+background   = "bg"
+selection_fg = "fg"
+selection_bg = "selection"
+
+# Mapped by role, exactly like the dark palette: black is a background
+# shade and white a text shade. Programs written for dark terminals print
+# "white" text, which stays readable this way. "Bright" means more contrast
+# with the background, so on light the bright accents are darker (OKLCH
+# lightness lowered by 0.06).
+color0       = "bg_strong"
+color1       = "red"
+color2       = "green"
+color3       = "yellow"
+color4       = "blue"
+color5       = "purple"
+color6       = "cyan"
+color7       = "fg_dim"
+color8       = "fg_faint"   # dim text, shell autosuggestions
+color9       = "#c21e32"
+color10      = "#008753"
+color11      = "#a06800"
+color12      = "#0064c9"
+color13      = "#813dc9"
+color14      = "#007a96"
+color15      = "fg_strong"

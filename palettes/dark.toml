@@ -1,0 +1,81 @@
+# lucid dark
+#
+# Every color the dark theme uses lives here. Edit a value, run ./lucid.py,
+# and every generated file picks it up. palettes/light.toml has the same
+# names with light-theme values; keep the two in step.
+#
+# Templates use {{name}} for "#rrggbb" and {{name.hex}} for "rrggbb".
+# In [terminal], a value may also be the name of a color from [colors].
+
+[colors]
+# Backgrounds. bg_dark and bg_darker sit behind the editor (floats,
+# statusline); bg_highlight and bg_strong sit on top of it, each standing out
+# a little more.
+bg_darker    = "#141625"  # tab line fill
+bg_dark      = "#1b1c2e"  # floats, popup menus, statusline
+bg           = "#212337"  # main background
+bg_highlight = "#2c2e43"  # cursorline, color column
+bg_strong    = "#383b52"  # selected menu item, matching words, terminal black
+border       = "#474b64"  # window borders, separators, whitespace markers
+selection    = "#464163"  # visual selection
+
+# Foregrounds, faintest to strongest
+fg_gutter    = "#5c617d"  # line numbers, end-of-line markers
+fg_faint     = "#828aab"  # brackets, delimiters, inactive text
+comment      = "#a0a2be"  # comments: low chroma so they don't blend into the blue background
+fg_dim       = "#b5c5e0"  # secondary text, statusline
+fg           = "#c5e1fb"  # main text
+fg_strong    = "#e4f3fa"  # emphasis, terminal bright white
+on_accent    = "#1b1c2e"  # text on an accent-colored block (search match, mode label)
+
+# Accents. Most sit at a similar perceived lightness (OKLCH L 0.76–0.85)
+# so no syntax color glows or sinks next to the others. Blue is a bit
+# darker (L 0.73): screens can't show a light blue that is also saturated,
+# so it trades some lightness to keep its color.
+red          = "#ff898b"  # errors, builtin variables (self)
+coral        = "#faa6b0"  # parameters
+orange       = "#ff9f6c"  # numbers, constants, builtin functions
+yellow       = "#fcc369"  # types, modules, warnings
+green        = "#39eeba"  # strings, added lines
+teal         = "#41dfcf"  # characters, hints
+cyan         = "#13dcf6"  # operators, info
+blue         = "#63adfe"  # functions, changed lines, titles
+lavender     = "#adb0f6"  # fields, properties, current line number
+purple       = "#c59efe"  # keywords
+pink         = "#eca9ef"  # escapes, macros, special symbols
+
+# Highlights behind text: accents blended into the background, so text
+# stays readable on top of them.
+diff_add         = "#2e4b52"  # green, 78% toward bg
+diff_add_text    = "#346664"  # green, 64%: added words inside a changed line (gitsigns)
+diff_change      = "#2b344f"  # blue, 86% toward bg
+diff_text        = "#374b71"  # blue, 68%: the changed part of a changed line
+diff_delete      = "#4d394a"  # red, 78% toward bg
+diff_delete_text = "#6b4756"  # red, 64%: deleted words inside a changed line (gitsigns)
+search           = "#2f596f"  # cyan, 68%: search matches
+
+[terminal]
+foreground   = "fg"
+background   = "bg"
+selection_fg = "fg"
+selection_bg = "selection"
+
+# 0–7 normal, 8–15 bright. "Bright" means more contrast with the background,
+# so here the bright accents are their normal color with OKLCH lightness
+# raised by about 0.05.
+color0       = "bg_strong"
+color1       = "red"
+color2       = "green"
+color3       = "yellow"
+color4       = "blue"
+color5       = "purple"
+color6       = "cyan"
+color7       = "fg_dim"
+color8       = "fg_faint"   # dim text, shell autosuggestions
+color9       = "#ffa5a4"
+color10      = "#52ffca"
+color11      = "#ffd89d"
+color12      = "#83bdff"
+color13      = "#d4b8ff"
+color14      = "#67e9ff"
+color15      = "fg_strong"
