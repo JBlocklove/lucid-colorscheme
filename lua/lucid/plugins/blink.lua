@@ -9,7 +9,7 @@ return function(c)
 		BlinkCmpLabelDeprecated = { fg = c.fg_faint, strikethrough = true },
 		BlinkCmpMenuBorder = { link = "FloatBorder" },
 		BlinkCmpDocBorder = { link = "FloatBorder" },
-		BlinkCmpDocSeparator = { fg = c.border, bg = c.bg_dark },
+		BlinkCmpDocSeparator = { fg = c.border, bg = c.bg },
 		BlinkCmpSignatureHelpBorder = { link = "FloatBorder" },
 
 		-- Kind icons take the color of the syntax they stand for, so a

@@ -8,9 +8,9 @@ return function(c)
 	return {
 		-- Editor ----------------------------------------------------------------
 		Normal = { fg = c.fg, bg = c.bg },
-		NormalFloat = { fg = c.fg, bg = c.bg_dark },
-		FloatBorder = { fg = c.border, bg = c.bg_dark },
-		FloatTitle = { fg = c.lavender, bg = c.bg_dark, bold = true },
+		NormalFloat = { fg = c.fg, bg = c.bg },
+		FloatBorder = { fg = c.border, bg = c.bg },
+		FloatTitle = { fg = c.lavender, bg = c.bg, bold = true },
 		Cursor = { fg = c.bg, bg = c.fg },
 		CursorLine = { bg = c.bg_highlight },
 		CursorColumn = { bg = c.bg_highlight },
@@ -35,13 +35,14 @@ return function(c)
 		WinBar = { fg = c.fg_dim },
 		WinBarNC = { fg = c.fg_faint },
 
-		Pmenu = { fg = c.fg, bg = c.bg_dark },
+		Pmenu = { fg = c.fg, bg = c.bg },
 		PmenuSel = { bg = c.bg_strong, bold = true },
 		PmenuMatch = { fg = c.blue, bold = true },
-		PmenuKind = { fg = c.fg_dim, bg = c.bg_dark },
-		PmenuExtra = { fg = c.fg_faint, bg = c.bg_dark },
+		PmenuKind = { fg = c.fg_dim, bg = c.bg },
+		PmenuExtra = { fg = c.fg_faint, bg = c.bg },
 		PmenuSbar = { bg = c.bg_highlight },
 		PmenuThumb = { bg = c.border },
+        PmenuBorder = { link = "FloatBorder" },
 
 		Visual = { bg = c.selection },
 		Search = { fg = c.fg, bg = c.search },

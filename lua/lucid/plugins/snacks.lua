@@ -17,5 +17,8 @@ return function(c)
 		SnacksDashboardFile = { fg = c.lavender },
 		SnacksDashboardIcon = { fg = c.blue },
 		SnacksDashboardFooter = { fg = c.comment, italic = true },
+
+        SnacksInputBorder = { link = "FloatBorder" },
+        SnacksInputTitle = { link = "FloatBorder" },
 	}
 end
